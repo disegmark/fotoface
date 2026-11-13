@@ -1,8 +1,8 @@
 import { useMemo, useState } from "react";
 
 const SERIES = [
-  { clave: "usuario", etiqueta: "Clientes", color: "#2a78d6" },
-  { clave: "asistente", etiqueta: "Lumi (IA)", color: "#eb6834" },
+  { clave: "usuario", etiqueta: "Clientes", color: "#1c5cab" },
+  { clave: "asistente", etiqueta: "Lumi (IA)", color: "#4fb3e8" },
   { clave: "humano", etiqueta: "Equipo humano", color: "#1baf7a" },
 ];
 

@@ -169,7 +169,7 @@ export default function SeccionVentas() {
               key={f.id}
               onClick={() => setFiltro(f.id)}
               className={`flex items-center gap-2 rounded-full border px-3.5 py-1.5 text-sm font-medium transition-colors ${
-                activo ? "border-brand-primary bg-brand-primary text-white" : "border-border bg-white hover:bg-muted"
+                activo ? "border-brand-primary bg-brand-primary text-white" : "border-border bg-card hover:bg-muted"
               }`}
             >
               {info && <PuntoNivel nivel={f.id} />}

@@ -65,7 +65,7 @@ export default function SeccionInscripciones() {
               key={id}
               onClick={() => setFiltroPrograma(id)}
               className={`rounded-full border px-3.5 py-1.5 text-sm font-medium transition-colors ${
-                activo ? "border-brand-primary bg-brand-primary text-white" : "border-border bg-white hover:bg-muted"
+                activo ? "border-brand-primary bg-brand-primary text-white" : "border-border bg-card hover:bg-muted"
               }`}
             >
               {nombre}
@@ -122,7 +122,7 @@ export default function SeccionInscripciones() {
                       value={inscripcion.estado}
                       disabled={mutacionEstado.isPending}
                       onChange={(e) => mutacionEstado.mutate({ id: inscripcion.id, estado: e.target.value })}
-                      className="rounded-md border border-input bg-white px-2 py-1 text-xs"
+                      className="rounded-md border border-input bg-card px-2 py-1 text-xs"
                     >
                       {Object.entries(ESTADOS).map(([id, info]) => (
                         <option key={id} value={id}>

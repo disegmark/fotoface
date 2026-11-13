@@ -131,7 +131,7 @@
     var s = document.createElement("script");
     s.src = SISTEMA + "/widget.js";
     s.defer = true;
-    s.setAttribute("data-color", "#c9432b");
+    s.setAttribute("data-color", "#0a5fa3");
     document.body.appendChild(s);
   }
 })();

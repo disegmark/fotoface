@@ -166,9 +166,9 @@ export default function PanelConversaciones() {
                   className={cn(
                     "max-w-[80%] rounded-2xl px-4 py-2.5 shadow-sm",
                     esUsuario
-                      ? "bg-white"
+                      ? "bg-secondary"
                       : mensaje.remitente === "humano"
-                        ? "bg-amber-100"
+                        ? "bg-amber-500/15"
                         : "bg-brand-primary/10"
                   )}
                 >

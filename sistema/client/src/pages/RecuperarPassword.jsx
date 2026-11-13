@@ -66,7 +66,7 @@ export default function RecuperarPassword() {
                 type="button"
                 onClick={() => setCanal(c.id)}
                 className={`flex flex-1 items-center justify-center gap-1.5 rounded-md py-1.5 text-sm font-medium transition-colors ${
-                  canal === c.id ? "bg-white shadow-sm" : "text-muted-foreground"
+                  canal === c.id ? "bg-card shadow-sm" : "text-muted-foreground"
                 }`}
               >
                 <c.icono className="h-3.5 w-3.5" /> {c.etiqueta}

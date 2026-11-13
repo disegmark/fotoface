@@ -58,7 +58,7 @@ function FormularioNuevo({ onCerrar }) {
           value={datos.productos}
           onChange={cambiar("productos")}
         />
-        <select value={datos.entrega} onChange={cambiar("entrega")} className="rounded-md border border-input bg-white px-3 py-2 text-sm">
+        <select value={datos.entrega} onChange={cambiar("entrega")} className="rounded-md border border-input bg-card px-3 py-2 text-sm">
           <option value="tienda">Recojo en tienda</option>
           <option value="domicilio">Envío a domicilio</option>
         </select>
@@ -142,7 +142,7 @@ export default function SeccionPedidos() {
             key={id}
             onClick={() => setFiltro(id)}
             className={`rounded-full border px-3.5 py-1.5 text-sm font-medium transition-colors ${
-              filtro === id ? "border-brand-primary bg-brand-primary text-white" : "border-border bg-white hover:bg-muted"
+              filtro === id ? "border-brand-primary bg-brand-primary text-white" : "border-border bg-card hover:bg-muted"
             }`}
           >
             {nombre}
@@ -232,7 +232,7 @@ export default function SeccionPedidos() {
                       value={p.estado}
                       disabled={mutacion.isPending}
                       onChange={(e) => mutacion.mutate({ id: p.id, estado: e.target.value })}
-                      className="rounded-md border border-input bg-white px-2 py-1 text-xs"
+                      className="rounded-md border border-input bg-card px-2 py-1 text-xs"
                     >
                       {Object.entries(ESTADOS).map(([id, info]) => (
                         <option key={id} value={id}>
@@ -251,7 +251,7 @@ export default function SeccionPedidos() {
                         onBlur={(e) => {
                           if (e.target.value !== String(p.monto ?? "")) mutacion.mutate({ id: p.id, monto: e.target.value });
                         }}
-                        className="w-24 rounded-md border border-input bg-white px-2 py-1 text-xs"
+                        className="w-24 rounded-md border border-input bg-card px-2 py-1 text-xs"
                       />
                     </label>
                     {p.entrega === "domicilio" && !p.reparto_enlace && !["entregado", "cancelado"].includes(p.estado) && (

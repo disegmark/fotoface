@@ -9,7 +9,7 @@
 
   var script = document.currentScript;
   var BASE = script ? new URL(script.src).origin : "";
-  var COLOR = (script && script.getAttribute("data-color")) || "#c9432b";
+  var COLOR = (script && script.getAttribute("data-color")) || "#0a5fa3";
   var CLAVE_SESION = "fotoface_chat_sesion";
   var INTERVALO_POLLING = 6000;
 
@@ -52,7 +52,7 @@
     "<style>" +
     ":host{all:initial}" +
     "*{box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}" +
-    ".boton{position:fixed;right:20px;bottom:20px;width:60px;height:60px;border-radius:50%;border:0;cursor:pointer;background:linear-gradient(135deg,#c9432b,#38d3ff);color:#fff;box-shadow:0 6px 20px rgba(10,20,40,.35);display:flex;align-items:center;justify-content:center;z-index:2147483646;transition:transform .15s}" +
+    ".boton{position:fixed;right:20px;bottom:20px;width:60px;height:60px;border-radius:50%;border:0;cursor:pointer;background:linear-gradient(135deg,#03426f,#2b9ad6);color:#fff;box-shadow:0 6px 20px rgba(10,20,40,.35);display:flex;align-items:center;justify-content:center;z-index:2147483646;transition:transform .15s}" +
     ".boton:hover{transform:scale(1.06)}" +
     ".boton svg{width:28px;height:28px;fill:#fff}" +
     ".panel{position:fixed;right:20px;bottom:92px;width:370px;max-width:calc(100vw - 24px);height:540px;max-height:calc(100vh - 110px);background:#0d1326;border:1px solid rgba(255,255,255,.08);border-radius:16px;box-shadow:0 12px 40px rgba(0,0,0,.4);display:none;flex-direction:column;overflow:hidden;z-index:2147483646}" +

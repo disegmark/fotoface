@@ -35,8 +35,9 @@ export default {
           foreground: "hsl(var(--card-foreground))",
         },
         brand: {
-          primary: "#c9432b",
-          cyan: "#ffb347",
+          primary: "#0a5fa3",
+          dark: "#03426f",
+          cyan: "#4fb3e8",
         },
       },
       borderRadius: {
@@ -49,7 +50,7 @@ export default {
         display: ["Plus Jakarta Sans", "system-ui", "sans-serif"],
       },
       backgroundImage: {
-        "brand-gradient": "linear-gradient(135deg, #c9432b 0%, #ffb347 100%)",
+        "brand-gradient": "linear-gradient(135deg, #03426f 0%, #0a5fa3 45%, #2b9ad6 100%)",
       },
       keyframes: {
         "fade-in-up": {
