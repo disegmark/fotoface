@@ -80,9 +80,8 @@ function ItemNav({ seccion, activa, onSeleccionar }) {
 export default function Sidebar({ seccionActiva, onCambiarSeccion }) {
   return (
     <aside className="flex h-full w-64 shrink-0 flex-col gap-6 bg-brand-primary px-3 py-6">
-      <div className="flex items-center gap-2 px-2 font-display text-lg font-bold text-white">
-        <img src="/logo.svg" alt="FotoFace" className="h-8 w-8 rounded-full" />
-        FotoFace
+      <div className="mx-2 rounded-xl bg-white px-4 py-3">
+        <img src="/logo-marca.png" alt="FotoFace" className="mx-auto h-auto w-full max-w-[180px]" />
       </div>
 
       <nav className="flex flex-1 flex-col gap-1 overflow-y-auto">

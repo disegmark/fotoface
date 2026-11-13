@@ -30,8 +30,10 @@ export default function Login() {
     <div className="flex min-h-screen items-center justify-center bg-muted/30 px-4">
       <Card className="w-full max-w-sm">
         <CardHeader className="items-center text-center">
-          <img src="/logo.svg" alt="FotoFace" className="mb-2 h-14 w-14 rounded-full" />
-          <CardTitle>FotoFace</CardTitle>
+          <div className="mb-2 rounded-xl bg-white px-5 py-4">
+            <img src="/logo-fotoface.png" alt="FotoFace, tu foto estudio personal" className="w-48" />
+          </div>
+          <CardTitle className="sr-only">FotoFace</CardTitle>
           <CardDescription>Iniciá sesión para acceder al panel de administración.</CardDescription>
         </CardHeader>
         <CardContent>
