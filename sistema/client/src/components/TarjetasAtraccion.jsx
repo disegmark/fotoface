@@ -23,7 +23,7 @@ export default function TarjetasAtraccion() {
         <h3 className="font-display text-sm font-semibold text-muted-foreground">KPIs de Marketing — Atracción</h3>
         <Card>
           <CardContent className="p-4 text-sm text-muted-foreground">
-            Conectá Google en <strong>Conexiones</strong> y completá el Property ID de Analytics 4 y/o el sitio de
+            Conecta Google en <strong>Conexiones</strong> y completa el Property ID de Analytics 4 y/o el sitio de
             Search Console para ver tráfico, impresiones, CTR y palabras clave posicionadas de fotoface.pro.
           </CardContent>
         </Card>

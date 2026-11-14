@@ -80,7 +80,7 @@ const PROVEEDORES_DISPONIBLES = [
       transport: "http",
       url,
     }),
-    nota: "La URL la generás en mcp.zapier.com dentro de tu cuenta; ya incluye tu credencial, no hace falta un token aparte.",
+    nota: "La URL la generas en mcp.zapier.com dentro de tu cuenta; ya incluye tu credencial, no hace falta un token aparte.",
   },
 ];
 
@@ -242,7 +242,7 @@ function GestorPlantillasWhatsapp() {
           </div>
           <textarea
             className="min-h-[70px] rounded-lg border border-input bg-background px-2 py-1.5 text-sm"
-            placeholder="Texto del mensaje. Usá {{1}}, {{2}}... para variables."
+            placeholder="Texto del mensaje. Usa {{1}}, {{2}}... para variables."
             value={form.cuerpo}
             onChange={(e) => setForm({ ...form, cuerpo: e.target.value })}
             required
@@ -348,7 +348,7 @@ function TarjetaWhatsappMetaBusiness() {
       </CardHeader>
       <CardContent className="flex flex-col gap-3">
         <CardDescription>
-          Mismo token que usa Lumi para enviar y recibir mensajes. Acá además podés ver el número conectado y
+          Mismo token que usa Lumi para enviar y recibir mensajes. Aquí además puedes ver el número conectado y
           gestionar las plantillas de mensajes (HSM) sin salir del dashboard.
         </CardDescription>
 
@@ -801,7 +801,7 @@ export default function TabConexiones() {
       {!data?.mcp_habilitado && !isLoading && (
         <Card className="border-amber-300 bg-amber-50">
           <CardContent className="p-4 text-sm text-amber-800">
-            El harness MCP está deshabilitado globalmente (<code>MCP_ENABLED=false</code> en el servidor). Podés
+            El harness MCP está deshabilitado globalmente (<code>MCP_ENABLED=false</code> en el servidor). Puedes
             guardar conexiones igual, pero no van a activarse hasta que se habilite.
           </CardContent>
         </Card>
@@ -870,7 +870,7 @@ export default function TabConexiones() {
                 <Badge variant="success" className="w-fit">Calendar activo</Badge>
               ) : (
                 <p className="text-xs text-muted-foreground">
-                  Usá "primary" para el calendario principal de la cuenta conectada, o el email de otro calendario
+                  Usa "primary" para el calendario principal de la cuenta conectada, o el email de otro calendario
                   que esa cuenta tenga compartido con permiso de edición.
                 </p>
               )}

@@ -17,7 +17,7 @@ if (!process.env.CLAUDE_API_KEY) {
 if (!process.env.JWT_SECRET) {
   console.error(
     `[${new Date().toISOString()}] ERROR: falta la variable de entorno JWT_SECRET. ` +
-      "Es obligatoria para poder proteger el dashboard con login. Genera un valor largo y aleatorio y agregalo a tu .env."
+      "Es obligatoria para poder proteger el dashboard con login. Genera un valor largo y aleatorio y agrégalo a tu .env."
   );
   process.exit(1);
 }

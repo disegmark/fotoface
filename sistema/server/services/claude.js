@@ -288,7 +288,7 @@ Contexto de la conversacion:
 ${
   numeroTelefono.startsWith("web:")
     ? `- Estas conversando por el CHAT WEB del sitio de ${config.nombre_agencia} (no por WhatsApp), con un visitante identificado internamente como "${numeroTelefono}". Ese es el "numero_telefono" que debes usar en las herramientas; NO es un telefono real ni debes mencionarlo al visitante.
-- Como no tienes su telefono, antes de agendar o inscribirlo pidele su nombre completo, un numero de WhatsApp y su email, y pasalos en los campos "whatsapp"/"email" de agendar_turno (en notas) o registrar_inscripcion.
+- Como no tienes su telefono, antes de agendar o inscribirlo pidele su nombre completo, un numero de WhatsApp y su email, y pásalos en los campos "whatsapp"/"email" de agendar_turno (en notas) o registrar_inscripcion.
 - El chat web solo muestra texto: usa *un asterisco* para negrita y evita tablas, encabezados o enlaces en formato markdown (pega las URLs tal cual).`
     : `- Estas conversando por WhatsApp con el numero ${numeroTelefono}. Ese es el "numero_telefono" que debes usar en las herramientas (consultar_disponibilidad, ver_turnos_paciente, agendar_turno, etc.) sin volver a pedirselo al cliente.`
 }
@@ -377,7 +377,7 @@ async function agendarTurno({ numero_telefono, nombre_cliente, fecha_turno, tipo
   }
 
   if (!["virtual", "presencial"].includes(modalidad)) {
-    return { exito: false, mensaje: 'El campo modalidad debe ser "virtual" o "presencial". Preguntale al cliente cual prefiere.' };
+    return { exito: false, mensaje: 'El campo modalidad debe ser "virtual" o "presencial". Pregúntale al cliente cual prefiere.' };
   }
 
   const { horarios_libres } = await obtenerDisponibilidad(fecha_turno);

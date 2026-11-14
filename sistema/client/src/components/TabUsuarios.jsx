@@ -45,7 +45,7 @@ function FilaUsuario({ usuario, esUsuarioActual, onEliminar, eliminandoDeshabili
           variant="ghost"
           size="icon"
           disabled={eliminandoDeshabilitado}
-          title={esUsuarioActual ? "No podés eliminar tu propia cuenta" : "Eliminar usuario"}
+          title={esUsuarioActual ? "No puedes eliminar tu propia cuenta" : "Eliminar usuario"}
           onClick={() => onEliminar(usuario.id)}
         >
           <Trash2 className="h-4 w-4 text-destructive" />

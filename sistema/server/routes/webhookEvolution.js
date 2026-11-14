@@ -42,7 +42,7 @@ function construirMensajeFallback() {
     .get();
   const numero = config?.telefono_humano || config?.telefono;
   return numero
-    ? `Disculpa, estoy teniendo problemas tecnicos. Intenta de nuevo en unos minutos o comunicate al ${numero}.`
+    ? `Disculpa, estoy teniendo problemas tecnicos. Intenta de nuevo en unos minutos o comunícate al ${numero}.`
     : "Disculpa, estoy teniendo problemas tecnicos. Intenta de nuevo en unos minutos.";
 }
 

@@ -40,7 +40,7 @@ export function BloquePlataforma({ plataforma, configurada }) {
       {!configurada ? (
         <Card>
           <CardContent className="p-4 text-sm text-muted-foreground">
-            Cargá el Access Token y el ID de cuenta en <strong>Conexiones</strong> para ver impresiones, alcance,
+            Carga el Access Token y el ID de cuenta en <strong>Conexiones</strong> para ver impresiones, alcance,
             clics, CTR, inversión y conversiones reales de {info.nombre}.
           </CardContent>
         </Card>

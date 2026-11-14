@@ -37,7 +37,7 @@ export default function GeneradorLinkOrigen() {
       <CardHeader>
         <CardTitle>Generar link con código de origen</CardTitle>
         <CardDescription>
-          Pegá este link en la bio o el anuncio de TikTok, LinkedIn, etc. Cuando alguien lo use para escribirte,
+          Pega este link en la bio o el anuncio de TikTok, LinkedIn, etc. Cuando alguien lo use para escribirte,
           el sistema detecta el código y lo cuenta como venido de esa campaña — sin cambiar nada más.
         </CardDescription>
       </CardHeader>
@@ -65,7 +65,7 @@ export default function GeneradorLinkOrigen() {
           </div>
         ) : (
           <p className="flex items-center gap-1.5 text-xs text-muted-foreground">
-            <Link2 className="h-3.5 w-3.5" /> Completá un código para generar el link.
+            <Link2 className="h-3.5 w-3.5" /> Completa un código para generar el link.
           </p>
         )}
       </CardContent>

@@ -16,7 +16,7 @@ const API_VERSION = "v21.0";
 function requerirCredenciales() {
   const token = clavesMetaWhatsapp.obtenerToken();
   if (!token) {
-    throw new Error("Falta el access token de WhatsApp Business (Meta). Cargalo en Conexiones.");
+    throw new Error("Falta el access token de WhatsApp Business (Meta). Cárgalo en Conexiones.");
   }
   return token;
 }
@@ -24,7 +24,7 @@ function requerirCredenciales() {
 function requerirWabaId() {
   const wabaId = clavesMetaWhatsapp.obtenerWabaId();
   if (!wabaId) {
-    throw new Error("Falta el WhatsApp Business Account ID (WABA ID). Cargalo en Conexiones.");
+    throw new Error("Falta el WhatsApp Business Account ID (WABA ID). Cárgalo en Conexiones.");
   }
   return wabaId;
 }
@@ -51,7 +51,7 @@ async function llamarGraphApi(ruta, opciones = {}) {
 async function obtenerInfoCuenta() {
   const phoneNumberId = clavesMetaWhatsapp.obtenerPhoneNumberId();
   if (!phoneNumberId) {
-    throw new Error("Falta el Phone Number ID. Cargalo en Conexiones.");
+    throw new Error("Falta el Phone Number ID. Cárgalo en Conexiones.");
   }
 
   const numeroActual = await llamarGraphApi(

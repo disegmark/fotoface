@@ -32,7 +32,7 @@ export default function RecuperarPassword() {
   const mutacionRestablecer = useMutation({
     mutationFn: () => restablecerPassword({ email, codigo, nueva_password: nuevaPassword }),
     onSuccess: () => {
-      toast.success("Contraseña actualizada. Ya podés iniciar sesión.");
+      toast.success("Contraseña actualizada. Ya puedes iniciar sesión.");
       navigate("/login", { replace: true });
     },
     onError: (err) => setError(err.message || "No se pudo restablecer la contraseña."),
@@ -76,12 +76,12 @@ export default function RecuperarPassword() {
 
           {canal === "whatsapp" ? (
             <CardDescription>
-              Escribí la palabra <b>recuperar</b> desde tu WhatsApp registrado al número de la agencia (el mismo
+              Escribe la palabra <b>recuperar</b> desde tu WhatsApp registrado al número de la agencia (el mismo
               donde Lumi responde a los clientes). Te llega un código de 6 dígitos válido por 10 minutos.
             </CardDescription>
           ) : (
             <CardDescription>
-              Ingresá tu email abajo y hacé clic en "Enviar código". Si tenés una cuenta, te llega un código de 6
+              Ingresa tu email abajo y haz clic en "Enviar código". Si tienes una cuenta, te llega un código de 6
               dígitos válido por 10 minutos.
             </CardDescription>
           )}

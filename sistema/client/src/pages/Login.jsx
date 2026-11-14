@@ -34,7 +34,7 @@ export default function Login() {
             <img src="/logo-fotoface.png" alt="FotoFace, tu foto estudio personal" className="w-48" />
           </div>
           <CardTitle className="sr-only">FotoFace</CardTitle>
-          <CardDescription>Iniciá sesión para acceder al panel de administración.</CardDescription>
+          <CardDescription>Inicia sesión para acceder al panel de administración.</CardDescription>
         </CardHeader>
         <CardContent>
           <form className="flex flex-col gap-4" onSubmit={manejarEnvio}>

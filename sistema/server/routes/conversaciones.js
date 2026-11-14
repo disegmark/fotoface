@@ -12,17 +12,17 @@ const PROVEEDORES_POR_CANAL = {
   meta: {
     servicio: metaWhatsapp,
     estaHabilitado: () => metaWhatsapp.estaHabilitado(),
-    mensajeError: "El envio saliente por WhatsApp Cloud API (Meta) no esta configurado. Completalo en Conexiones.",
+    mensajeError: "El envio saliente por WhatsApp Cloud API (Meta) no esta configurado. Complétalo en Conexiones.",
   },
   ycloud: {
     servicio: ycloud,
     estaHabilitado: () => ycloud.estaHabilitado(),
-    mensajeError: "El envio saliente por YCloud no esta configurado. Completalo en Conexiones.",
+    mensajeError: "El envio saliente por YCloud no esta configurado. Complétalo en Conexiones.",
   },
   twilio: {
     servicio: twilioService,
     estaHabilitado: () => twilioService.estaHabilitadoEnvioSaliente(),
-    mensajeError: "El envio saliente de WhatsApp (Twilio) no esta configurado. Completalo en Conexiones.",
+    mensajeError: "El envio saliente de WhatsApp (Twilio) no esta configurado. Complétalo en Conexiones.",
   },
 };
 

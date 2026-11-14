@@ -113,7 +113,7 @@ function FormularioCampana({ numeroBot, onCreada }) {
         <CardHeader>
           <CardTitle>Generar link con código de origen</CardTitle>
           <CardDescription>
-            Pegá este link en la bio o el anuncio de TikTok, LinkedIn, etc. Cuando alguien lo use para escribirte, el
+            Pega este link en la bio o el anuncio de TikTok, LinkedIn, etc. Cuando alguien lo use para escribirte, el
             sistema detecta el código y lo cuenta como venido de esa campaña.
           </CardDescription>
         </CardHeader>
@@ -192,7 +192,7 @@ function FormularioCampana({ numeroBot, onCreada }) {
             <img src={qrDataUrl} alt="Código QR del link de campaña" className="h-44 w-44 rounded-lg border border-border" />
           ) : (
             <div className="flex h-44 w-44 items-center justify-center rounded-lg border border-dashed border-border text-center text-xs text-muted-foreground">
-              Completá un código para generar el QR
+              Completa un código para generar el QR
             </div>
           )}
           <a

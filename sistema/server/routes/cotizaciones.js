@@ -130,7 +130,7 @@ router.post("/:id/recordatorio", async (req, res) => {
   if (String(id).startsWith("demo-")) {
     return res
       .status(400)
-      .json({ error: "Esta es una cotizacion de ejemplo. Cargá una cotizacion real para poder mandar recordatorios." });
+      .json({ error: "Esta es una cotizacion de ejemplo. Carga una cotización real para poder mandar recordatorios." });
   }
 
   const cotizacion = db.prepare("SELECT * FROM cotizaciones WHERE id = ?").get(id);
@@ -172,7 +172,7 @@ router.post("/:id/reunion", async (req, res) => {
   if (String(id).startsWith("demo-")) {
     return res
       .status(400)
-      .json({ error: "Esta es una cotizacion de ejemplo. Cargá una cotizacion real para poder agendar reuniones." });
+      .json({ error: "Esta es una cotizacion de ejemplo. Carga una cotización real para poder agendar reuniones." });
   }
   if (!fecha_turno || !["virtual", "presencial"].includes(modalidad)) {
     return res.status(400).json({ error: "Se requiere fecha_turno y una modalidad valida (virtual o presencial)." });
