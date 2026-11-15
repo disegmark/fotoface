@@ -5,6 +5,10 @@ import Dashboard from "./pages/Dashboard.jsx";
 import Login from "./pages/Login.jsx";
 import RecuperarPassword from "./pages/RecuperarPassword.jsx";
 import RutaProtegida from "./components/RutaProtegida.jsx";
+import PanelTarjetas from "./pages/PanelTarjetas.jsx";
+import { MODO_TARJETAS } from "./lib/modo.js";
+
+if (MODO_TARJETAS) document.title = "Tarjetas digitales · FotoFace";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -19,17 +23,24 @@ export default function App() {
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Navigate to="/dashboard" replace />} />
+          {MODO_TARJETAS ? (
+            <>
+              <Route path="/" element={<RutaProtegida><PanelTarjetas /></RutaProtegida>} />
+              <Route path="/dashboard" element={<Navigate to="/" replace />} />
+            </>
+          ) : (
+            <Route path="/" element={<Navigate to="/dashboard" replace />} />
+          )}
           <Route path="/login" element={<Login />} />
           <Route path="/recuperar" element={<RecuperarPassword />} />
-          <Route
+          {!MODO_TARJETAS && <Route
             path="/dashboard"
             element={
               <RutaProtegida>
                 <Dashboard />
               </RutaProtegida>
             }
-          />
+          />}
         </Routes>
       </BrowserRouter>
       <Toaster position="top-right" richColors />

@@ -55,6 +55,9 @@ const publicidadRouter = require("./routes/publicidad");
 const metaWhatsappBusinessRouter = require("./routes/metaWhatsappBusiness");
 const twilioCredencialesRouter = require("./routes/twilioCredenciales");
 const ycloudCredencialesRouter = require("./routes/ycloudCredenciales");
+const tarjetasRutas = require("./routes/tarjetas");
+const tarjetaPublica = require("./routes/tarjetaPublica");
+const tarjetasService = require("./services/tarjetas");
 
 const app = express();
 app.set("trust proxy", 1);
@@ -62,6 +65,32 @@ const httpServer = http.createServer(app);
 socket.inicializar(httpServer);
 const PORT = process.env.PORT || 3001;
 const ES_PRODUCCION = process.env.NODE_ENV === "production";
+
+// Tarjetas virtuales: cada una en su subdominio (<slug>.fotoface.pro). Si el
+// Host es de una tarjeta, solo se atienden sus rutas publicas.
+app.use((req, res, next) => {
+  const slug = tarjetasService.slugDeHost(req.headers.host);
+  if (!slug) return next();
+  req.tarjetaSlug = slug;
+  req.tarjetaBase = "";
+  tarjetaPublica.router(req, res, () => res.status(404).type("text/plain").send("No encontrado"));
+});
+// Panel del proyecto Tarjetas (tarjetas.fotoface.pro): sirve el mismo cliente
+// en modo "solo tarjetas" y limita la API a sesion + tarjetas.
+const HOST_PANEL_TARJETAS = (process.env.TARJETAS_PANEL_HOST || `tarjetas.${tarjetasService.DOMINIO}`).toLowerCase();
+app.use((req, res, next) => {
+  const host = String(req.headers.host || "").toLowerCase().split(":")[0];
+  if (host !== HOST_PANEL_TARJETAS || !req.path.startsWith("/api/")) return next();
+  if (/^\/api\/(auth|tarjetas)(\/|$)/.test(req.path)) return next();
+  res.status(404).json({ error: "No disponible en este dominio." });
+});
+// Vista por ruta (/t/<slug>) y verificacion de dominio para el TLS a demanda de Caddy.
+app.use("/t/:slug", (req, res, next) => {
+  req.tarjetaSlug = String(req.params.slug).toLowerCase();
+  req.tarjetaBase = `/t/${encodeURIComponent(req.tarjetaSlug)}`;
+  tarjetaPublica.router(req, res, next);
+});
+app.get("/api/tarjetas-tls/verificar", tarjetaPublica.verificarTls);
 
 // Chat web publico (widget embebido en cualquier sitio via widget.js). Va
 // antes del CORS global porque se llama desde otro dominio y no usa
@@ -95,6 +124,8 @@ app.use(
 );
 // Base de conocimiento: acepta archivos en base64, por eso tiene su propio limite (va antes del parser global).
 app.use("/api/conocimiento", cookieParser(), express.json({ limit: "20mb" }), requireAuth, conocimientoRouter);
+// Fotos y musica de las tarjetas (base64): limite propio, antes del parser global.
+app.use("/api/tarjetas", cookieParser(), express.json({ limit: "18mb" }), requireAuth, tarjetasRutas.subida);
 
 app.use(
   express.json({
@@ -134,6 +165,7 @@ app.use("/api/ventas", requireAuth, ventasRouter);
 app.use("/api/contactos", requireAuth, contactosRouter);
 app.use("/api/inscripciones", requireAuth, inscripcionesRouter);
 app.use("/api/pedidos", requireAuth, pedidosRouter);
+app.use("/api/tarjetas", requireAuth, tarjetasRutas.router);
 app.use("/api/marketing", requireAuth, marketingRouter);
 app.use("/api/cotizaciones", requireAuth, cotizacionesRouter);
 app.use("/api/sso", requireAuth, ssoRouter);

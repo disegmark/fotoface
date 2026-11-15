@@ -360,6 +360,78 @@ db.exec(`
   END;
 `);
 
+// Tarjetas virtuales interactivas (bodas, bautizos, cumpleanos...). Las arma el
+// equipo desde Dashboard -> Tarjetas; la pagina publica es /t/<slug> (ver
+// server/services/tarjetas.js y server/services/tarjetaPagina.js).
+db.exec(`
+  CREATE TABLE IF NOT EXISTS tarjetas (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    slug TEXT NOT NULL UNIQUE,
+    tipo TEXT NOT NULL DEFAULT 'boda',
+    titulo TEXT NOT NULL,
+    cliente_nombre TEXT,
+    cliente_whatsapp TEXT,
+    fecha_evento TEXT,
+    estado TEXT NOT NULL DEFAULT 'borrador' CHECK(estado IN ('borrador', 'publicada', 'archivada')),
+    datos TEXT NOT NULL DEFAULT '{}',
+    clave_anfitrion TEXT NOT NULL,
+    pedido_id INTEGER,
+    visitas INTEGER NOT NULL DEFAULT 0,
+    creado_en DATETIME DEFAULT (datetime('now', 'localtime')),
+    actualizado_en DATETIME DEFAULT (datetime('now', 'localtime'))
+  );
+`);
+db.exec(`
+  CREATE TRIGGER IF NOT EXISTS trg_tarjetas_actualizado_en
+  AFTER UPDATE OF slug, tipo, titulo, cliente_nombre, cliente_whatsapp, fecha_evento, estado, datos, pedido_id ON tarjetas
+  FOR EACH ROW
+  BEGIN
+    UPDATE tarjetas SET actualizado_en = datetime('now', 'localtime') WHERE id = OLD.id;
+  END;
+`);
+db.exec(`
+  CREATE TABLE IF NOT EXISTS tarjeta_invitados (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    tarjeta_id INTEGER NOT NULL REFERENCES tarjetas(id) ON DELETE CASCADE,
+    nombre TEXT NOT NULL,
+    pases INTEGER NOT NULL DEFAULT 1,
+    whatsapp TEXT,
+    grupo TEXT,
+    token TEXT NOT NULL UNIQUE,
+    abierta_en DATETIME,
+    creado_en DATETIME DEFAULT (datetime('now', 'localtime'))
+  );
+`);
+db.exec("CREATE INDEX IF NOT EXISTS idx_tarjeta_invitados_tarjeta ON tarjeta_invitados(tarjeta_id)");
+db.exec(`
+  CREATE TABLE IF NOT EXISTS tarjeta_respuestas (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    tarjeta_id INTEGER NOT NULL REFERENCES tarjetas(id) ON DELETE CASCADE,
+    invitado_id INTEGER REFERENCES tarjeta_invitados(id) ON DELETE SET NULL,
+    nombre TEXT NOT NULL,
+    asiste INTEGER NOT NULL,
+    cantidad INTEGER NOT NULL DEFAULT 0,
+    telefono TEXT,
+    menu TEXT,
+    mensaje TEXT,
+    creado_en DATETIME DEFAULT (datetime('now', 'localtime')),
+    actualizado_en DATETIME DEFAULT (datetime('now', 'localtime'))
+  );
+`);
+db.exec("CREATE INDEX IF NOT EXISTS idx_tarjeta_respuestas_tarjeta ON tarjeta_respuestas(tarjeta_id)");
+db.exec("CREATE UNIQUE INDEX IF NOT EXISTS idx_tarjeta_respuestas_invitado ON tarjeta_respuestas(invitado_id) WHERE invitado_id IS NOT NULL");
+db.exec(`
+  CREATE TABLE IF NOT EXISTS tarjeta_firmas (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    tarjeta_id INTEGER NOT NULL REFERENCES tarjetas(id) ON DELETE CASCADE,
+    nombre TEXT NOT NULL,
+    mensaje TEXT NOT NULL,
+    aprobada INTEGER NOT NULL DEFAULT 1,
+    creado_en DATETIME DEFAULT (datetime('now', 'localtime'))
+  );
+`);
+db.exec("CREATE INDEX IF NOT EXISTS idx_tarjeta_firmas_tarjeta ON tarjeta_firmas(tarjeta_id)");
+
 // Base de conocimiento de Lumi: documentos de texto (o importados de un
 // archivo/URL) que el equipo gestiona desde Dashboard -> Conocimiento y que
 // Lumi usa para responder (ver server/services/conocimiento.js).
