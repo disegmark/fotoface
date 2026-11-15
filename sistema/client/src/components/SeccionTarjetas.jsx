@@ -3,7 +3,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import {
   ArrowLeft, Copy, Download, Eye, EyeOff, ExternalLink, Heart, ImagePlus, Loader2, Music, Plus, RefreshCw,
-  Save, Send, Trash2, Users, X, Check, CopyPlus, MessageCircle,
+  Save, Send, Trash2, Users, X, Check, CopyPlus, MessageCircle, Sparkles,
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -614,6 +614,20 @@ function EditorTarjeta({ id, tipos, dominio, onVolver }) {
                     ))}
                   </div>
                 </div>
+                <div className="flex flex-col gap-3 rounded-lg border border-brand-cyan/40 bg-brand-primary/10 p-4 md:col-span-2">
+                  <Interruptor activo={!!d.vitrina?.activa} onChange={(v) => setDD("vitrina", { activa: v })} etiqueta="Mostrar en la vitrina (tarjetas.fotoface.pro)" />
+                  <p className="text-xs text-muted-foreground">
+                    Úsalo para tarjetas de muestra. Solo aparecen en la vitrina las tarjetas <b>publicadas</b>. No marques tarjetas de clientes sin su permiso: cualquiera podría abrirlas.
+                  </p>
+                  {d.vitrina?.activa && (
+                    <Campo etiqueta="Descripción en la vitrina (opcional)">
+                      <Input maxLength={160} placeholder="Boda en la playa con apertura de sobre y galería" value={d.vitrina?.descripcion || ""} onChange={(e) => setDD("vitrina", { descripcion: e.target.value })} />
+                    </Campo>
+                  )}
+                  {d.vitrina?.activa && tarjeta.estado !== "publicada" && (
+                    <p className="text-xs font-medium text-amber-600">Publica la tarjeta para que aparezca en la vitrina.</p>
+                  )}
+                </div>
                 <div className="flex gap-2 border-t border-border pt-4 md:col-span-2">
                   <Button variant="outline" size="sm" onClick={async () => {
                     const t = await api.duplicarTarjeta(id).catch((e) => toast.error(e.message));
@@ -820,8 +834,16 @@ export default function SeccionTarjetas() {
         <p className="max-w-3xl text-sm text-muted-foreground">
           Invitaciones digitales interactivas a pedido: bodas, bautizos, cumpleaños, quince años, aniversarios y más. Cada una se publica en su propio
           subdominio (<b>nombres.{dominio}</b>) con apertura animada, música, cuenta regresiva, mapa, confirmación de asistencia, regalos y libro de firmas.
+          Las que marques como muestra se ven en la vitrina pública <b>{(data?.vitrina || "").replace("https://", "")}</b>.
         </p>
-        {!nueva && <Button size="sm" onClick={() => setNueva(true)}><Plus className="h-4 w-4" /> Nueva tarjeta</Button>}
+        <div className="flex flex-wrap gap-2">
+          {data?.vitrina && (
+            <Button variant="outline" size="sm" asChild>
+              <a href={data.vitrina} target="_blank" rel="noopener"><ExternalLink className="h-4 w-4" /> Ver vitrina</a>
+            </Button>
+          )}
+          {!nueva && <Button size="sm" onClick={() => setNueva(true)}><Plus className="h-4 w-4" /> Nueva tarjeta</Button>}
+        </div>
       </div>
 
       {nueva && <FormularioNueva tipos={tipos} dominio={dominio} onCerrar={() => setNueva(false)} onCreada={(t) => { setNueva(false); queryClient.invalidateQueries({ queryKey: ["tarjetas"] }); setEditando(t.id); }} />}
@@ -851,6 +873,7 @@ export default function SeccionTarjetas() {
                 <div className="absolute left-3 top-3 flex gap-1.5">
                   <Badge variant={estado.variante}>{estado.etiqueta}</Badge>
                   <Badge variant="secondary">{t.tipo_nombre}</Badge>
+                  {t.vitrina && <Badge className="gap-1 bg-brand-cyan text-white"><Sparkles className="h-3 w-3" /> En vitrina</Badge>}
                 </div>
               </div>
               <CardContent className="flex flex-col gap-1 p-4">

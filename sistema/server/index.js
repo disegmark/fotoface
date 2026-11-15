@@ -58,6 +58,7 @@ const ycloudCredencialesRouter = require("./routes/ycloudCredenciales");
 const tarjetasRutas = require("./routes/tarjetas");
 const tarjetaPublica = require("./routes/tarjetaPublica");
 const tarjetasService = require("./services/tarjetas");
+const tarjetasVitrina = require("./services/tarjetasVitrina");
 
 const app = express();
 app.set("trust proxy", 1);
@@ -75,14 +76,29 @@ app.use((req, res, next) => {
   req.tarjetaBase = "";
   tarjetaPublica.router(req, res, () => res.status(404).type("text/plain").send("No encontrado"));
 });
-// Panel del proyecto Tarjetas (tarjetas.fotoface.pro): sirve el mismo cliente
-// en modo "solo tarjetas" y limita la API a sesion + tarjetas.
-const HOST_PANEL_TARJETAS = tarjetasService.PANEL_HOST;
+// Vitrina publica de tarjetas (tarjetas.fotoface.pro): pagina de muestra sin
+// login. La gestion de tarjetas vive en el sistema (seccion Tarjetas digitales).
+// En ese host solo se sirven la vitrina y los logos; las rutas del panel
+// anterior (/login, /dashboard) redirigen al sistema y la API no esta disponible.
+const HOST_VITRINA = tarjetasService.VITRINA_HOST;
+const ARCHIVOS_VITRINA = new Set(["/logo-marca.png", "/logo-fotoface.png", "/favicon.png", "/apple-touch-icon.png"]);
 app.use((req, res, next) => {
   const host = String(req.headers.host || "").toLowerCase().split(":")[0];
-  if (host !== HOST_PANEL_TARJETAS || !req.path.startsWith("/api/")) return next();
-  if (/^\/api\/(auth|tarjetas)(\/|$)/.test(req.path)) return next();
-  res.status(404).json({ error: "No disponible en este dominio." });
+  if (host !== HOST_VITRINA) return next();
+  if (req.method === "GET" && req.path === "/") {
+    res.set("Cache-Control", "public, max-age=120");
+    return res.type("html").send(tarjetasVitrina.renderVitrina());
+  }
+  if (req.method === "GET" && ARCHIVOS_VITRINA.has(req.path)) return next();
+  if (req.method === "GET" && req.path === "/robots.txt") {
+    return res.type("text/plain").send(`User-agent: *\nAllow: /\n`);
+  }
+  if (/^\/(login|dashboard|recuperar)(\/|$)/.test(req.path)) {
+    const sistema = (process.env.PUBLIC_BASE_URL || "https://fotoface.ia.nom.pe").replace(/\/$/, "");
+    return res.redirect(302, `${sistema}${req.path === "/dashboard" ? "/dashboard" : req.path}`);
+  }
+  if (req.path.startsWith("/api/")) return res.status(404).json({ error: "No disponible en este dominio." });
+  return res.redirect(302, "/");
 });
 // Vista por ruta (/t/<slug>) y verificacion de dominio para el TLS a demanda de Caddy.
 app.use("/t/:slug", (req, res, next) => {

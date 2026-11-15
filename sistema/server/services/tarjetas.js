@@ -16,7 +16,11 @@ const db = require("../db");
 const socket = require("./socket");
 
 const DOMINIO = (process.env.TARJETAS_DOMINIO || "fotoface.pro").toLowerCase();
-const PANEL_HOST = (process.env.TARJETAS_PANEL_HOST || `tarjetas.${DOMINIO}`).toLowerCase();
+// Vitrina publica de tarjetas (tarjetas.fotoface.pro). La gestion vive en el
+// sistema (fotoface.ia.nom.pe > Tarjetas digitales). Se mantiene el nombre de la
+// variable TARJETAS_PANEL_HOST por compatibilidad con los .env existentes.
+const VITRINA_HOST = (process.env.TARJETAS_VITRINA_HOST || process.env.TARJETAS_PANEL_HOST || `tarjetas.${DOMINIO}`).toLowerCase();
+const PANEL_HOST = VITRINA_HOST;
 const DIR_ARCHIVOS = path.join(__dirname, "..", "data", "tarjetas");
 
 const TIPOS = {
@@ -141,6 +145,7 @@ function listar() {
       estado: t.estado,
       visitas: t.visitas,
       foto: t.datos?.portada?.foto || null,
+      vitrina: !!t.datos?.vitrina?.activa,
       invitados: invitados.n,
       pases: invitados.pases,
       firmas: firmas.n,
@@ -252,6 +257,7 @@ function sanearDatos(d = {}) {
   const r = d.regalos || {};
   const rs = d.rsvp || {};
   const f = d.firmas || {};
+  const vt = d.vitrina || {};
   return {
     tema: TEMAS.includes(d.tema) ? d.tema : "marfil",
     portada: {
@@ -297,6 +303,7 @@ function sanearDatos(d = {}) {
     firmas: { activa: f.activa !== false, moderar: !!f.moderar },
     hashtag: texto(d.hashtag, 60).replace(/\s+/g, ""),
     cierre: texto(d.cierre, 300),
+    vitrina: { activa: !!vt.activa, descripcion: texto(vt.descripcion, 160) },
   };
 }
 
@@ -343,7 +350,7 @@ function duplicar(id) {
   for (let i = 2; !slugDisponible(slug); i++) slug = `${t.slug.slice(0, 34)}-copia${i}`;
   const nueva = crear({ tipo: t.tipo, titulo: `${t.titulo} (copia)`, slug });
   // Los archivos son por tarjeta: la copia conserva el diseño, sin fotos ni musica.
-  const datos = { ...t.datos, portada: { ...t.datos.portada, foto: null }, musica: { archivo: null, titulo: "" }, galeria: [] };
+  const datos = { ...t.datos, portada: { ...t.datos.portada, foto: null }, musica: { archivo: null, titulo: "" }, galeria: [], vitrina: { activa: false, descripcion: "" } };
   return actualizar(nueva.id, { datos });
 }
 
@@ -378,6 +385,29 @@ function rutaArchivo(id, nombre) {
   if (!limpio) return null;
   const ruta = path.join(DIR_ARCHIVOS, String(Number(id)), limpio);
   return fs.existsSync(ruta) ? ruta : null;
+}
+
+/* ---------- Vitrina ---------- */
+
+/** Tarjetas publicadas que el equipo marco como muestra para tarjetas.fotoface.pro. */
+function listarVitrina() {
+  return db
+    .prepare("SELECT * FROM tarjetas WHERE estado = 'publicada' ORDER BY actualizado_en DESC, id DESC")
+    .all()
+    .map(parsear)
+    .filter((t) => t.datos?.vitrina?.activa)
+    .map((t) => ({
+      slug: t.slug,
+      url: t.url,
+      tipo: t.tipo,
+      tipo_nombre: t.tipo_nombre,
+      titulo: t.datos.portada?.titulo || t.titulo,
+      antetitulo: t.datos.portada?.antetitulo || "",
+      descripcion: t.datos.vitrina.descripcion || "",
+      tema: t.datos.tema,
+      foto: t.datos.portada?.foto || null,
+      apertura: t.datos.apertura?.activa ? t.datos.apertura.estilo : null,
+    }));
 }
 
 /* ---------- Invitados ---------- */
@@ -514,6 +544,8 @@ function registrarVisita(tarjeta, invitado) {
 module.exports = {
   DOMINIO,
   PANEL_HOST,
+  VITRINA_HOST,
+  listarVitrina,
   TIPOS,
   TEMAS,
   ESTADOS,

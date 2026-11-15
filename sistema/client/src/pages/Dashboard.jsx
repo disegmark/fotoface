@@ -17,6 +17,7 @@ import SeccionInscripciones from "@/components/SeccionInscripciones";
 import SeccionPedidos from "@/components/SeccionPedidos";
 import SeccionMarketing from "@/components/SeccionMarketing";
 import SeccionOficina from "@/components/SeccionOficina";
+import SeccionTarjetas from "@/components/SeccionTarjetas";
 import SeccionConApps from "@/components/SeccionConApps";
 import ChatRapido from "@/components/ChatRapido";
 import { resolverSeccion } from "@/lib/appsIntegradas";
@@ -32,6 +33,7 @@ const TITULOS_SECCION = {
   ventas: "Ventas y Clientes Potenciales",
   marketing: "Marketing",
   oficina: "Oficina",
+  tarjetas: "Tarjetas digitales",
   conocimiento: "Conocimiento",
   conexiones: "Conexiones",
   usuarios: "Usuarios",
@@ -94,6 +96,8 @@ export default function Dashboard() {
             <SeccionOficina />
           </SeccionConApps>
         );
+      case "tarjetas":
+        return <SeccionTarjetas />;
       case "configuracion":
         return <TabConfiguracion />;
       case "usuarios":

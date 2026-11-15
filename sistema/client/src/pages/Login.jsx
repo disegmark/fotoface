@@ -7,7 +7,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { iniciarSesion } from "@/lib/api";
-import { MODO_TARJETAS } from "@/lib/modo";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -35,7 +34,7 @@ export default function Login() {
             <img src="/logo-fotoface.png" alt="FotoFace, tu foto estudio personal" className="w-48" />
           </div>
           <CardTitle className="sr-only">FotoFace</CardTitle>
-          <CardDescription>{MODO_TARJETAS ? "Inicia sesión para crear y gestionar las tarjetas digitales." : "Inicia sesión para acceder al panel de administración."}</CardDescription>
+          <CardDescription>Inicia sesión para acceder al panel de administración.</CardDescription>
         </CardHeader>
         <CardContent>
           <form className="flex flex-col gap-4" onSubmit={manejarEnvio}>

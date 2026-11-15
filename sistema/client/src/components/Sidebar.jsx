@@ -12,6 +12,7 @@ import {
   GraduationCap,
   BookOpen,
   Printer,
+  MailOpen,
 } from "lucide-react";
 import { appsDeSeccion, SUBSECCION_NATIVA } from "@/lib/appsIntegradas";
 
@@ -26,6 +27,32 @@ const SECCIONES_PRINCIPALES = [
   { id: "marketing", nombre: "Marketing", icono: Megaphone },
   { id: "oficina", nombre: "Oficina", icono: Briefcase },
 ];
+
+// Proyecto especial con su propia vitrina publica (tarjetas.fotoface.pro).
+const SECCION_TARJETAS = { id: "tarjetas", nombre: "Tarjetas digitales", icono: MailOpen };
+
+function ItemEspecial({ seccion, activa, onSeleccionar }) {
+  const Icono = seccion.icono;
+  const activo = activa === seccion.id;
+  return (
+    <button
+      onClick={() => onSeleccionar(seccion.id)}
+      className={`flex w-full items-center gap-3 rounded-xl border px-3 py-2.5 text-left text-sm font-semibold transition-colors ${
+        activo
+          ? "border-white/40 bg-gradient-to-r from-brand-cyan/60 to-white/20 text-white"
+          : "border-white/20 bg-white/5 text-white/85 hover:bg-white/10 hover:text-white"
+      }`}
+    >
+      <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-white/15">
+        <Icono className="h-4 w-4" />
+      </span>
+      <span className="flex min-w-0 flex-col leading-tight">
+        <span className="truncate">{seccion.nombre}</span>
+        <span className="text-[11px] font-normal text-white/70">Proyecto especial</span>
+      </span>
+    </button>
+  );
+}
 
 const SECCIONES_ADMIN = [
   { id: "conocimiento", nombre: "Conocimiento", icono: BookOpen },
@@ -89,6 +116,8 @@ export default function Sidebar({ seccionActiva, onCambiarSeccion }) {
           <ItemNav key={seccion.id} seccion={seccion} activa={seccionActiva} onSeleccionar={onCambiarSeccion} />
         ))}
 
+        <div className="my-2 border-t border-white/10" />
+        <ItemEspecial seccion={SECCION_TARJETAS} activa={seccionActiva} onSeleccionar={onCambiarSeccion} />
         <div className="my-2 border-t border-white/10" />
 
         {SECCIONES_ADMIN.map((seccion) => (

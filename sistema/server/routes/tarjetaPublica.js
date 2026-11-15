@@ -93,7 +93,7 @@ router.get("/anfitrion/:clave", (req, res) => {
 /*
  * Caddy (TLS a demanda) consulta aqui antes de emitir un certificado para
  * <slug>.fotoface.pro: 200 solo si la tarjeta existe y esta publicada. Como el
- * bloque comodin *.fotoface.pro tambien cubre el panel (tarjetas.) y www., esos
+ * bloque comodin *.fotoface.pro tambien cubre la vitrina (tarjetas.) y www., esos
  * dos se aprueban siempre. Solo responde a llamadas locales directas (Caddy en
  * el mismo VPS).
  */
@@ -101,7 +101,7 @@ function verificarTls(req, res) {
   const local = ["127.0.0.1", "::1", "::ffff:127.0.0.1"].includes(req.socket.remoteAddress) && !req.headers["x-forwarded-for"];
   if (!local) return res.sendStatus(403);
   const dominio = String(req.query.domain || "").toLowerCase();
-  if (dominio === tarjetas.PANEL_HOST || dominio === `www.${tarjetas.DOMINIO}`) return res.sendStatus(200);
+  if (dominio === tarjetas.VITRINA_HOST || dominio === `www.${tarjetas.DOMINIO}`) return res.sendStatus(200);
   const slug = tarjetas.slugDeHost(dominio);
   const t = slug && tarjetas.obtenerPorSlug(slug);
   res.sendStatus(t && t.estado === "publicada" ? 200 : 404);

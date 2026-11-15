@@ -23,7 +23,7 @@ function manejar(fn) {
 
 router.get(
   "/",
-  manejar(() => ({ dominio: tarjetas.DOMINIO, tipos: tarjetas.TIPOS, temas: tarjetas.TEMAS, tarjetas: tarjetas.listar() }))
+  manejar(() => ({ dominio: tarjetas.DOMINIO, vitrina: `https://${tarjetas.VITRINA_HOST}`, tipos: tarjetas.TIPOS, temas: tarjetas.TEMAS, tarjetas: tarjetas.listar() }))
 );
 
 router.get(
