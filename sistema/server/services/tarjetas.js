@@ -16,6 +16,7 @@ const db = require("../db");
 const socket = require("./socket");
 
 const DOMINIO = (process.env.TARJETAS_DOMINIO || "fotoface.pro").toLowerCase();
+const PANEL_HOST = (process.env.TARJETAS_PANEL_HOST || `tarjetas.${DOMINIO}`).toLowerCase();
 const DIR_ARCHIVOS = path.join(__dirname, "..", "data", "tarjetas");
 
 const TIPOS = {
@@ -512,6 +513,7 @@ function registrarVisita(tarjeta, invitado) {
 
 module.exports = {
   DOMINIO,
+  PANEL_HOST,
   TIPOS,
   TEMAS,
   ESTADOS,

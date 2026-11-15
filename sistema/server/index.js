@@ -77,7 +77,7 @@ app.use((req, res, next) => {
 });
 // Panel del proyecto Tarjetas (tarjetas.fotoface.pro): sirve el mismo cliente
 // en modo "solo tarjetas" y limita la API a sesion + tarjetas.
-const HOST_PANEL_TARJETAS = (process.env.TARJETAS_PANEL_HOST || `tarjetas.${tarjetasService.DOMINIO}`).toLowerCase();
+const HOST_PANEL_TARJETAS = tarjetasService.PANEL_HOST;
 app.use((req, res, next) => {
   const host = String(req.headers.host || "").toLowerCase().split(":")[0];
   if (host !== HOST_PANEL_TARJETAS || !req.path.startsWith("/api/")) return next();
