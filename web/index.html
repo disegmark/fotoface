@@ -16,9 +16,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/assets/css/estilos.css" />
+  <link rel="stylesheet" href="/assets/css/estilos.css?v=20261119" />
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"LocalBusiness","name":"FotoFace","url":"https://fotoface.pro/","description":"Estudio de fotografía e impresión fotográfica","image":"https://fotoface.pro/assets/img/logo-fotoface.png"}
+  {"@context":"https://schema.org","@type":"LocalBusiness","name":"FotoFace","url":"https://fotoface.pro/","description":"Estudio de fotografía e impresión fotográfica","image":["https://fotoface.pro/assets/img/logo-fotoface.png","https://fotoface.pro/assets/img/fotos/delivery.webp"]}
   </script>
 </head>
 <body>
@@ -35,6 +35,7 @@
       <nav id="menu" class="menu">
         <a href="#fotografia">Fotografía</a>
         <a href="#impresion">Impresión</a>
+        <a href="#servicios">Servicios</a>
         <a href="#tarjetas">Tarjetas digitales</a>
         <a href="#como">Cómo pedir</a>
         <a href="#preguntas">Preguntas</a>
@@ -62,9 +63,9 @@
           </ul>
         </div>
         <div class="hero-visual" aria-hidden="true">
-          <figure class="polaroid p1"><div class="foto f-retrato"></div><figcaption>Retrato</figcaption></figure>
-          <figure class="polaroid p2"><div class="foto f-evento"></div><figcaption>Eventos</figcaption></figure>
-          <figure class="polaroid p3"><div class="foto f-cuadro"></div><figcaption>Cuadros</figcaption></figure>
+          <figure class="polaroid p1"><img class="foto" src="/assets/img/fotos/hero-impresiones.webp" alt="" width="480" height="600" /><figcaption>Impresiones</figcaption></figure>
+          <figure class="polaroid p2"><img class="foto" src="/assets/img/fotos/hero-recuerdos.webp" alt="" width="410" height="512" /><figcaption>Recuerdos</figcaption></figure>
+          <figure class="polaroid p3"><img class="foto" src="/assets/img/fotos/hero-envios.webp" alt="" width="480" height="600" /><figcaption>Envíos</figcaption></figure>
         </div>
       </div>
     </section>
@@ -122,12 +123,12 @@
         </header>
         <div class="productos">
           <article class="producto">
-            <div class="muestra m-revelado" aria-hidden="true"><span></span><span></span><span></span></div>
+            <div class="muestra muestra-foto"><img src="/assets/img/fotos/revelado.webp" alt="Abanico de fotos reveladas en papel fotográfico" width="460" height="460" loading="lazy" /></div>
             <h3>Revelado digital</h3>
             <p>10x15 · 13x18 · 15x21 · 20x25 cm</p>
           </article>
           <article class="producto">
-            <div class="muestra m-poster" aria-hidden="true"><span></span></div>
+            <div class="muestra muestra-foto"><img src="/assets/img/fotos/ampliaciones.webp" alt="Ampliación fotográfica de una familia sobre un grupo de impresiones" width="600" height="600" loading="lazy" /></div>
             <h3>Ampliaciones y pósters</h3>
             <p>Desde 20x30 cm hasta gran formato</p>
           </article>
@@ -143,6 +144,22 @@
           </article>
         </div>
         <p class="nota">El precio final y la fecha de entrega se confirman al revisar tus fotos. Pregúntale a nuestra asistente por chat y te orienta en el momento.</p>
+      </div>
+    </section>
+
+    <!-- GALERÍA DE SERVICIOS -->
+    <section class="seccion" id="servicios">
+      <div class="contenedor">
+        <header class="titulo-seccion">
+          <p class="etiqueta">Lo que hacemos</p>
+          <h2>Fotografía, edición e impresión en un solo lugar</h2>
+          <p>Sesiones en estudio y en exteriores, edición de fotos y video para tus redes, e impresiones con colores reales en papel fotográfico profesional.</p>
+        </header>
+        <div class="galeria">
+          <figure><img src="/assets/img/fotos/servicio-fotografia.webp" alt="Fotografía en estudio y en exteriores: retratos, graduaciones, familia, mascotas y eventos" width="600" height="900" loading="lazy" /><figcaption>Fotografía en estudio y exteriores</figcaption></figure>
+          <figure><img src="/assets/img/fotos/servicio-edicion.webp" alt="Edición de videos: corte, color, audio, textos y formatos para redes sociales" width="600" height="900" loading="lazy" /><figcaption>Edición de fotos y video</figcaption></figure>
+          <figure><img src="/assets/img/fotos/servicio-impresion.webp" alt="Impresión de fotos con colores reales en papel fotográfico profesional" width="600" height="900" loading="lazy" /><figcaption>Impresión con colores reales</figcaption></figure>
+        </div>
       </div>
     </section>
 
@@ -196,6 +213,10 @@
             <p>Recoge en tienda o recíbelo en casa: te enviamos un enlace para compartir tu ubicación exacta y seguir al repartidor.</p>
           </li>
         </ol>
+        <figure class="banda-foto">
+          <img src="/assets/img/fotos/delivery.webp" alt="Repartidor de FotoFace entregando un pedido de fotos en la puerta de una clienta" width="1200" height="800" loading="lazy" />
+          <figcaption>Tus fotos llegan a tu puerta, bien empacadas.</figcaption>
+        </figure>
       </div>
     </section>
 
