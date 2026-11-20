@@ -64,6 +64,7 @@
   document.querySelectorAll('[data-tipo="sesion"]').forEach(function (a) {
     a.addEventListener("click", function () {
       form.querySelector('input[name="tipo"][value="sesion"]').checked = true;
+      if (a.dataset.servicio) form.servicio.value = a.dataset.servicio;
       actualizarVista();
     });
   });

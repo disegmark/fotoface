@@ -292,6 +292,7 @@ if (configuracionExistente.total === 0) {
       "Impresion fotografica (revelado digital, ampliaciones, posters)",
       "Cuadros (canvas, foam/trovicel, enmarcado) y fotolibros",
       "Restauracion y retoque de fotos antiguas",
+      "Edicion de fotos y video (color, retoque, montaje, audio, textos, formatos para redes)",
       "Envio a domicilio de pedidos impresos",
     ]),
     "FotoFace (fotoface.pro) es un estudio de fotografia e impresion fotografica: sesiones en estudio y en exteriores, cobertura de eventos e impresion profesional de fotos, ampliaciones, cuadros y fotolibros, con entrega en tienda o envio a domicilio."

@@ -19,6 +19,17 @@ y fotolibros, con recojo en tienda o envío a domicilio.
   equipo y de las instalaciones de empresas.
 - **Restauración y retoque**: recuperación de fotos antiguas o dañadas, coloreado, retoque.
 
+## Edición de fotos y video
+
+Se envía el material (por WhatsApp como documento, o enlace de Google Drive/WeTransfer) y se entrega
+editado y listo para usar en álbumes, negocios o redes sociales. El precio depende de la cantidad de
+fotos o la duración del video: Lumi toma el pedido y el equipo confirma el presupuesto.
+
+- **Edición de fotos**: ajuste de color y luz, eliminación de imperfecciones, retoque profesional,
+  mejora de calidad y resolución.
+- **Edición de video**: corte y montaje, corrección de color, mejora de audio, textos, títulos y
+  transiciones, integración de fotos y videos, formatos para redes sociales (Reels, TikTok, Stories).
+
 ## Impresión fotográfica
 
 - **Revelado digital**: tamaños 10x15, 13x18, 15x21 y 20x25 cm, en acabado brillante o mate.
@@ -42,3 +53,4 @@ y fotolibros, con recojo en tienda o envío a domicilio.
 
 ## Contacto
 - Web: fotoface.pro
+- WhatsApp directo (atención personal del equipo): 998259080 (+51 998 259 080)

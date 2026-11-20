@@ -193,7 +193,7 @@ const TOOLS = [
   {
     name: "registrar_pedido",
     description:
-      "Registra un pedido de impresion fotografica (revelado, ampliaciones, posters, cuadros canvas/foam, fotolibros, restauracion). Usala solo cuando el cliente confirme que quiere hacer el pedido y ya tengas: nombre, detalle de productos (tamano, acabado, cantidad) y forma de entrega (y direccion si es a domicilio).",
+      "Registra un pedido de impresion fotografica (revelado, ampliaciones, posters, cuadros canvas/foam, fotolibros, restauracion) o de edicion de fotos/video (en productos detalla que editar, cuantas fotos o duracion del video y para que formato). Usala solo cuando el cliente confirme que quiere hacer el pedido y ya tengas: nombre, detalle de productos (tamano, acabado, cantidad) y forma de entrega (y direccion si es a domicilio).",
     input_schema: {
       type: "object",
       properties: {
